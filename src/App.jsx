@@ -1,11 +1,23 @@
 import React from 'react'
-
+import { Navbar, SmoothScroll } from './components'
+import { Home } from './pages'
+import { items } from './utils/constant'
 const App = () => {
   return (
-    <div className='bg-dark'>
-      <p className='text-light font-head text-5xl font-bold'>Head</p>
-      <p className='text-accent text-xs font-body tracking-tighter'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nulla deleniti optio consequatur quam, quibusdam dolor quaerat impedit vel, enim ut atque inventore eum. Reprehenderit nesciunt ipsum earum libero fugit cupiditate!</p>
-    </div>
+    <>
+      <SmoothScroll />
+      <Navbar
+        logo='/logo.png'
+        logoAlt="Blackmotion.id Logo"
+        items={items}
+        baseColor="#fff"
+        menuColor="#000"
+        buttonBgColor="#111"
+        buttonTextColor="#fff"
+        ease="power3.out"
+      />
+      <Home />
+    </>
   )
 }
 
