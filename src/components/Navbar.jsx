@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 
 const Navbar = ({
@@ -162,13 +163,14 @@ const Navbar = ({
                         <img src={logo} alt={logoAlt} className="logo h-[28px]" />
                     </div>
 
-                    <button
+                    <Link
+                        to={'/contact'}
                         type="button"
                         className="card-nav-cta-button hidden md:inline-flex items-center justify-center border-0 rounded-[calc(0.75rem-0.2rem)] px-4 h-full font-medium cursor-pointer transition-colors duration-300"
                         style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
                     >
                         Get Started
-                    </button>
+                    </Link>
                 </div>
 
                 <div
@@ -188,17 +190,17 @@ const Navbar = ({
                             </div>
                             <div className="nav-card-links mt-auto flex flex-col gap-[2px]">
                                 {item.links?.map((lnk, i) => (
-                                    <a
+                                    <Link
                                         key={`${lnk.label}-${i}`}
                                         className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
-                                        href={lnk.href}
+                                        to={lnk.href}
                                         aria-label={lnk.ariaLabel}
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                                             <path strokeLinecap="round" strokeLinejoin="round" d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25" />
                                         </svg>
                                         {lnk.label}
-                                    </a>
+                                    </Link>
                                 ))}
                             </div>
                         </div>

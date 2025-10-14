@@ -1,7 +1,10 @@
 import React from 'react'
+import { Routes, Route } from 'react-router-dom'
 import { Navbar, SmoothScroll } from './components'
-import { Home } from './pages'
+import { Home, Projects, Contact } from './pages'
+import Transition from './utils/Transition'
 import { items } from './utils/constant'
+
 const App = () => {
   return (
     <>
@@ -16,7 +19,13 @@ const App = () => {
         buttonTextColor="#fff"
         ease="power3.out"
       />
-      <Home />
+      <Transition>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
+      </Transition>
     </>
   )
 }

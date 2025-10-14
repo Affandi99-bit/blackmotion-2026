@@ -1,18 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Arimo:ital,wght@0,400..700;1,400..700&family=BBH+Sans+Bartle&display=swap");
 @import "tailwindcss";
 
 @font-face {
   font-family: "SF UI Display";
-  src: url("/SFUIDisplay-Light.ttf");
+  src: url("/SFUIDisplay-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Berlin";
+  src: url("/Berlin.ttf") format("truetype");
 }
 
 @theme {
-  --color-light: #f8f8f8;
+  --color-light: #f3f3f3;
   --color-dark: #0d0d0d;
   --color-accent: #1475ac;
-  --font-head: "BBH Sans Bartle", sans-serif;
-  --font-body: "Arimo", sans-serif;
-  --font-option: "SF UI Display", sans-serif;
+  --font-head: "Berlin", sans-serif;
+  --font-body: "SF UI Display", sans-serif;
 }
 ::-webkit-scrollbar {
   width: 0;
