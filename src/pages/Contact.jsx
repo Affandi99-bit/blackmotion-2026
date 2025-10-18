@@ -7,7 +7,7 @@ const Contact = () => {
     return (
         <div>
             {/* Hero */}
-            <main className='w-full h-screen relative'>
+            <main className='w-full h-screen relative bg-accent'>
                 <Hero animationType="rotate"
                     timeScale={0.5}
                     height={3.5}
@@ -41,8 +41,8 @@ const Contact = () => {
             </main>
 
             {/* Footer */}
-            <main className='w-full h-[80vh] relative flex items-start'>
-                <p className='absolute top-1 left-1 text-dark text-8xl/20 font-body font-semibold'>CONTACT</p>
+            <main className='w-full h-[80vh] relative flex items-start bg-light rounded-t-3xl'>
+                <p className='absolute top-3 left-3 text-dark text-8xl/20 font-body font-semibold'>CONTACT</p>
                 <section className='w-1/2 h-full flex flex-col items-start p-5 justify-end'>
                     <div className='flex justify-center items-start gap-1 text-gray-400 font-body'>
                         <p>also visit</p><a className='underline hover:italic' target='_blank' href='https://blackstudio.id'>blackstudio.id</a>

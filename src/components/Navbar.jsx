@@ -133,7 +133,7 @@ const Navbar = ({
 
     return (
         <div
-            className={`card-nav-container fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-50 top-[1.2em] md:top-[2em] ${className}`}
+            className={`card-nav-container  fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-50 top-[1.2em] md:top-[2em] ${className}`}
         >
             <nav
                 ref={navRef}
@@ -166,10 +166,10 @@ const Navbar = ({
                     <Link
                         to={'/contact'}
                         type="button"
-                        className="card-nav-cta-button hidden md:inline-flex items-center justify-center border-0 rounded-[calc(0.75rem-0.2rem)] px-4 h-full font-medium cursor-pointer transition-colors duration-300"
+                        className="card-nav-cta-button font-body tracking-wider hidden md:inline-flex items-center justify-center border-0 rounded-[calc(0.75rem-0.2rem)] px-4 h-full font-medium cursor-pointer transition-colors duration-300"
                         style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
                     >
-                        Get Started
+                        Get in touch
                     </Link>
                 </div>
 
@@ -185,7 +185,7 @@ const Navbar = ({
                             ref={setCardRef(idx)}
                             style={{ backgroundColor: item.bgColor, color: item.textColor }}
                         >
-                            <div className="nav-card-label font-normal tracking-[-0.5px] text-[18px] md:text-[22px]">
+                            <div className="nav-card-label font-head tracking-wider font-normal text-[18px] md:text-[22px]">
                                 {item.label}
                             </div>
                             <div className="nav-card-links mt-auto flex flex-col gap-[2px]">

@@ -1,13 +1,13 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Navbar, SmoothScroll } from './components'
-import { Home, Projects, Contact } from './pages'
+import { Home, Projects, Contact, Design, Motion } from './pages'
 import Transition from './utils/Transition'
 import { items } from './utils/constant'
 
 const App = () => {
   return (
-    <>
+    <main className='bg-dark'>
       <SmoothScroll />
       <Navbar
         logo='/logo.png'
@@ -23,10 +23,12 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
+          <Route path="/projects/design" element={<Design />} />
+          <Route path="/projects/motion" element={<Motion />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
       </Transition>
-    </>
+    </main>
   )
 }
 

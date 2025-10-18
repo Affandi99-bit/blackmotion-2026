@@ -17,7 +17,7 @@ const Transition = ({ children }) => {
         const tl = gsap.timeline();
 
         // Set initial states
-        gsap.set(page, { opacity: 0, y: 30, scale: 0.95 });
+        gsap.set(page, { opacity: 0, y: 30, scale: 0.95, visibility: 'hidden' });
         gsap.set(overlay, { scaleX: 0, transformOrigin: 'left center' });
 
         // Page transition animation sequence
@@ -26,6 +26,7 @@ const Transition = ({ children }) => {
             duration: 0.8,
             ease: 'power3.inOut'
         })
+            .set(page, { visibility: 'visible' }) // Make content visible only after overlay covers screen
             .to(page, {
                 opacity: 1,
                 y: 0,
