@@ -43,6 +43,11 @@ export const items = [
         ariaLabel: "Tiktok",
       },
       {
+        label: "Whatsapp",
+        href: "https://wa.me/628113577793",
+        ariaLabel: "Whatsapp",
+      },
+      {
         label: "LinkedIn",
         href: "https://id.linkedin.com/in/black-motion-3646a937a",
         ariaLabel: "LinkedIn",
