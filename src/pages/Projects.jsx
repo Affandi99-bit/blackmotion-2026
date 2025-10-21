@@ -1,42 +1,26 @@
 import React from 'react'
-import { SplitText, Footer } from '../components'
+import { SplitText, Footer, Posters } from '../components'
 import { items, design, motion } from '../utils/constant'
 import { Link } from 'react-router-dom'
 
 const Projects = () => {
     return (
-        <div>
-            {/* Hero */}
-            <main className='min-h-screen w-full bg-gradient-to-b from-light via-light to-dark p-3 pb-40'>
-                <h1 className='text-2xl font-head text-dark pt-28 '>OUR PROJECTS</h1>
-                <p className='text-lg font-body tracking-wider text-dark '>A showcase of our most impactful works — from visual storytelling to brand experiences that inspire and connect.</p>
-                <div className='pt-20'>
-                    <Link to={'/projects/design'} className='w-full pt-10 text-lg font-body tracking-wider text-dark border-b border-dark'>Watch Other</Link>
-                    <section className="flex items-center just flex-wrap gap-3 w-full pt-3">
-                        {design.slice(0, 3).map((item, index) => {
-                            return (
-                                <a href='#' key={index} className='w-96 h-64 bg-green-500 rounded-xl border border-light overflow-hidden grayscale hover:grayscale-0'>
-                                    <img src={item.image} alt="" className='w-full h-full object-cover' />
-                                </a>
-                            )
-                        })}
-                    </section>
+        <div className='w-full'>
+            <p className="absolute text-light font-body font-semibold tracking-wider text-9xl inset-20">Projects</p>
+            <div className="absolute w-40 bottom-10 right-10 text-light">
+                <p className='font-body font-semibold text-justify tracking-wider text-xs'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda mollitia minus facilis illo repudiandae nihil praesentium animi, deserunt exercitationem laborum.</p>
+                <div className='w-full pt-5 flex items-end justify-between gap-1 font-body font-semibold tracking-wider text-xs'>
+                    <Link className='border-b border-gray-400 flex items-center gap-1 z-50' to={'/projects/design'}>Design <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                    </svg>
+                    </Link>
+                    <Link className='border-b border-gray-400 flex items-center gap-1 z-50' to={'/projects/motion'}>Motion <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25 21 12m0 0-3.75 3.75M21 12H3" />
+                    </svg>
+                    </Link>
                 </div>
-                <div className='pt-20'>
-                    <Link to={'/projects/motion'} className='w-full pt-10 text-lg font-body tracking-wider text-dark border-b border-dark'>Watch Other</Link>
-
-                    <section className="flex items-center just flex-wrap gap-3 w-full pt-3">
-                        {motion.slice(0, 3).map((item, index) => {
-                            return (
-                                <a href='#' key={index} className='w-96 h-64 bg-green-500 rounded-xl border border-light overflow-hidden grayscale hover:grayscale-0'>
-                                    <img src={item.image} alt="" className='w-full h-full object-cover' />
-                                </a>
-                            )
-                        })}
-                    </section>
-                </div>
-            </main>
-            <Footer />
+            </div>
+            <Posters items={[...design, ...motion].map(item => item.image)} className={'h-screen w-full'} />
         </div>
     )
 }

@@ -1,7 +1,18 @@
 import Navbar from "./Navbar";
-import Hero from "./Hero";
 import SmoothScroll from "./SmoothScroll";
 import SplitText from "./SplitText";
 import TiltedCard from "./TiltedCard";
+import Magnet from "./Magnet";
 import Footer from "./Footer";
-export { Navbar, Hero, SmoothScroll, SplitText, TiltedCard, Footer };
+import Button from "./button/button";
+import Posters from "./Poster";
+export {
+  Navbar,
+  SmoothScroll,
+  Posters,
+  SplitText,
+  Magnet,
+  TiltedCard,
+  Footer,
+  Button,
+};

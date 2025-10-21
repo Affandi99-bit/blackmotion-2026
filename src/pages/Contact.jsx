@@ -1,8 +1,7 @@
 import React from 'react'
-import { Footer, SplitText } from '../components'
+import { Footer, SplitText, Magnet } from '../components'
 import { items } from '../utils/constant'
 import { Link } from 'react-router-dom'
-import { span } from 'motion/react-client'
 
 const Contact = () => {
     return (
@@ -29,11 +28,13 @@ const Contact = () => {
                     className='text-center font-body text-xs text-dark mt-2'
                 />
             </main>
-            <div className='bg-dark h-40 w-full flex items-center justify-center'>
+            <div className='bg-dark h-40 w-full p-3'>
                 {items.slice(2).map((item, index) => {
-                    return <p key={index} className='text-light text-xl flex items center gap-3 font-body'>{item.links.map((i, idx) => {
-                        return <a href={i.href} target='_blank' key={idx}>{i.label}</a>
-                    })}</p>
+                    return <div key={index} className='w-full'>{item.links.map((i, idx) => {
+                        return <Magnet key={idx} wrapperClassName='w-1/4' innerClassName='w-full flex items-center justify-around' padding={50} disabled={false} magnetStrength={15}>
+                            <a href={i.href} target='_blank' className='transition duration-300 text-light text-xl gap-3 font-body w-28 h-16 flex items-center justify-center rounded-full border hover:border-2 border-light border-dashed'>{i.label}</a>
+                        </Magnet>
+                    })}</div>
                 })}
             </div>
             {/* Footer */}

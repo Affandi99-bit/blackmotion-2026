@@ -1,5 +1,8 @@
 import React, { useLayoutEffect, useRef } from 'react'
 import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+
+gsap.registerPlugin(ScrollTrigger)
 
 const SplitText = ({
     as: Tag = 'p',
@@ -11,6 +14,13 @@ const SplitText = ({
     delay = 0,
     ease = 'power3.out',
     className = '',
+    // ScrollTrigger props
+    useScrollTrigger = false,
+    scrollTriggerStart = 'top 80%',
+    scrollTriggerEnd = 'bottom 20%',
+    scrollTriggerScrub = false,
+    scrollTriggerToggleActions = 'play none none none',
+    scrollTriggerMarkers = false,
 }) => {
     const containerRef = useRef(null)
 
@@ -18,18 +28,38 @@ const SplitText = ({
         const ctx = gsap.context(() => {
             const targets = containerRef.current?.querySelectorAll('.split-unit') || []
             gsap.set(targets, { y: fromY, opacity: 0 })
-            gsap.to(targets, {
-                y: 0,
-                opacity: 1,
-                duration,
-                ease,
-                stagger,
-                delay,
-            })
+
+            if (useScrollTrigger) {
+                gsap.to(targets, {
+                    y: 0,
+                    opacity: 1,
+                    duration,
+                    ease,
+                    stagger,
+                    delay,
+                    scrollTrigger: {
+                        trigger: containerRef.current,
+                        start: scrollTriggerStart,
+                        end: scrollTriggerEnd,
+                        scrub: scrollTriggerScrub,
+                        toggleActions: scrollTriggerToggleActions,
+                        markers: scrollTriggerMarkers,
+                    }
+                })
+            } else {
+                gsap.to(targets, {
+                    y: 0,
+                    opacity: 1,
+                    duration,
+                    ease,
+                    stagger,
+                    delay,
+                })
+            }
         }, containerRef)
 
         return () => ctx.revert()
-    }, [stagger, fromY, duration, delay, ease, text, type])
+    }, [stagger, fromY, duration, delay, ease, text, type, useScrollTrigger, scrollTriggerStart, scrollTriggerEnd, scrollTriggerScrub, scrollTriggerToggleActions, scrollTriggerMarkers])
 
     const renderUnits = () => {
         if (type === 'words') {
