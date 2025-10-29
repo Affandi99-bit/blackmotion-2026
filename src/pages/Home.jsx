@@ -267,7 +267,21 @@ const Home = () => {
                 {/* Project CTA */}
                 <Link to={'/projects'} className='text-light text-xs font-body rounded-full border border-gray-400 flex items-center justify-center w-28 h-12'>Recent Projects</Link>
                 {/* CLients */}
-                <div className='w-full h-full flex items-center justify-center px-20 py-12'>
+                <div
+                    className='w-full h-full flex items-center justify-center px-20 py-12'
+                    ref={el => { 
+                        if (!el) return;
+                        gsap.set(el, { opacity: 0, y: 60 });
+                        ScrollTrigger.create({
+                            trigger: el,
+                            start: 'top 85%',
+                            onEnter: () => {
+                                gsap.to(el, { opacity: 1, y: 0, duration: 1, ease: "power3.out" });
+                            },
+                            once: true
+                        });
+                    }}
+                >
                     <img src={client} className='object-contain w-full h-full' alt="" />
                 </div>
                 {/* Service */}
@@ -275,7 +289,33 @@ const Home = () => {
                     <p className='text-light pt-5 px-3 text-lg font-body'>Our Services:</p>
                     <div className='py-6 flex flex-wrap gap-10 items-center justify-around'>
                         {services.map((item) => {
-                            return <p key={item.id} className='text-light px-3 font-body text-lg w-1/3 border-b border-b-gray-500'><span className='text-5xl text-gray-500/25 font-head'>0{item.id}</span> {item.title}</p>
+                            return (
+                                <div key={item.id} className='service-item text-light px-3 font-body text-lg w-1/3 border-b border-b-gray-500'>
+                                    <SplitText
+                                        as='span'
+                                        text={`0${item.id}`}
+                                        type='words'
+                                        stagger={0.02}
+                                        fromY={18}
+                                        duration={0.6}
+                                        delay={1.1}
+                                        useScrollTrigger={true}
+                                        scrollTriggerScrub={1}
+                                        scrollTriggerStart='top 80%'
+                                        className='text-5xl text-gray-500/25 font-head px-2' />
+                                    <SplitText
+                                        as='span'
+                                        text={item.title}
+                                        type='words'
+                                        stagger={0.02}
+                                        fromY={18}
+                                        duration={0.6}
+                                        delay={1.2}
+                                        useScrollTrigger={true}
+                                        scrollTriggerScrub={1}
+                                        scrollTriggerStart='top 80%' />
+                                </div>
+                            )
                         })}
                     </div>
                 </div>

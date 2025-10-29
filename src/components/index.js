@@ -6,6 +6,7 @@ import Magnet from "./Magnet";
 import Footer from "./Footer";
 import Button from "./button/button";
 import Posters from "./Poster";
+import Gallery from "./Gallery";
 export {
   Navbar,
   SmoothScroll,
@@ -15,4 +16,5 @@ export {
   TiltedCard,
   Footer,
   Button,
+  Gallery,
 };
