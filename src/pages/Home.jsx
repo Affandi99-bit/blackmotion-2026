@@ -59,8 +59,8 @@ const Home = () => {
     return (
         <div className='relative'>
             {/* Hero */}
-            <main className='w-full h-screen flex items-start bg-[#f3f3f3]'>
-                <div className='flex flex-col justify-end p-3 h-full w-1/2'>
+            <main className='w-full h-[70dvh] md:h-screen relative flex items-start bg-[#f3f3f3]'>
+                <div className='z-10 flex flex-col justify-center md:justify-end p-5 h-full w-full md:w-1/2'>
                     <SplitText
                         as='h1'
                         text='BLACKMOTION.ID'
@@ -69,7 +69,7 @@ const Home = () => {
                         fromY={24}
                         duration={0.8}
                         delay={1.2}
-                        className='font-head tracking-widest text-6xl text-dark'
+                        className='font-head tracking-widest text-3xl sm:text-4xl md:text-6xl text-dark'
                     />
                     <SplitText
                         as='p'
@@ -82,11 +82,11 @@ const Home = () => {
                         className='font-body text-xs text-dark mt-2'
                     />
                 </div>
-                <div className='w-1/2 h-full'><video src={bg} loop muted autoPlay className='h-full w-full object-cover'></video></div>
+                <div className='w-full md:w-1/2 h-full absolute top-0 left-0 md:relative z-0'><video src={bg} loop muted autoPlay className='h-full w-full object-cover'></video></div>
             </main>
             {/* About */}
-            <main className='w-full bg-dark pb-40'>
-                <div className='text-gray-400 text-2xl/12 tracking-widest font-body text-justify px-3 pt-6'>
+            <main className='w-full bg-dark pb-72 md:pb-40'>
+                <div className='text-gray-400 text-xl md:text-2xl/12 tracking-widest font-body text-justify px-3 pt-6'>
                     <SplitText
                         as='span'
                         text='BLACKMOTION.ID'
@@ -231,8 +231,8 @@ const Home = () => {
                     />
                 </div>
                 {/* Achievement */}
-                <div ref={achievementsContainerRef} className='w-full mt-40 flex flex-col items-end min-h-[400vh]'>
-                    <section ref={achievementsRef} className='sticky w-full top-1/2 transform -translate-y-1/2 flex items-center justify-around'>
+                <div ref={achievementsContainerRef} className='w-full mt-40 flex flex-col items-end min-h-[300vh]'>
+                    <section ref={achievementsRef} className='sticky w-full top-1/2 transform -translate-y-1/2 flex flex-col md:flex-row items-center justify-around p-10 md:p-0'>
                         <TiltedCard
                             imageSrc={achievements[currentAchievementIndex]?.images}
                             altText={achievements[currentAchievementIndex]?.year}
@@ -268,8 +268,8 @@ const Home = () => {
                 <Link to={'/projects'} className='text-light text-xs font-body rounded-full border border-gray-400 flex items-center justify-center w-28 h-12'>Recent Projects</Link>
                 {/* CLients */}
                 <div
-                    className='w-full h-full flex items-center justify-center px-20 py-12'
-                    ref={el => { 
+                    className='w-full h-full flex items-center justify-center px-5 md:px-20 py-12'
+                    ref={el => {
                         if (!el) return;
                         gsap.set(el, { opacity: 0, y: 60 });
                         ScrollTrigger.create({
@@ -287,10 +287,10 @@ const Home = () => {
                 {/* Service */}
                 <div className='pt-10'>
                     <p className='text-light pt-5 px-3 text-lg font-body'>Our Services:</p>
-                    <div className='py-6 flex flex-wrap gap-10 items-center justify-around'>
+                    <div className='py-6 flex flex-col md:flex-row flex-wrap gap-10 items-center justify-around'>
                         {services.map((item) => {
                             return (
-                                <div key={item.id} className='service-item text-light px-3 font-body text-lg w-1/3 border-b border-b-gray-500'>
+                                <div key={item.id} className='service-item text-light px-3 font-body text-lg w-full md:w-1/3 border-b border-b-gray-500'>
                                     <SplitText
                                         as='span'
                                         text={`0${item.id}`}

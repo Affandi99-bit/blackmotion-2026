@@ -33,6 +33,11 @@ export const items = [
     textColor: "#fff",
     links: [
       {
+        label: "Contact",
+        href: "/contact",
+        ariaLabel: "Contact",
+      },
+      {
         label: "Instagram",
         href: "https://www.instagram.com/blackmotion.id/",
         ariaLabel: "Instagram",

@@ -133,7 +133,7 @@ const Navbar = ({
 
     return (
         <div
-            className={`card-nav-container  fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-50 top-[1.2em] md:top-[2em] ${className}`}
+            className={`card-nav-container fixed left-1/2 -translate-x-1/2 w-[90%] max-w-[800px] z-50 top-[1.2em] md:top-[2em] ${className}`}
         >
             <nav
                 ref={navRef}
@@ -188,11 +188,11 @@ const Navbar = ({
                             <div className="nav-card-label font-head tracking-wider font-normal text-[18px] md:text-[22px]">
                                 {item.label}
                             </div>
-                            <div className="nav-card-links mt-auto flex flex-col gap-[2px]">
+                            <div className="nav-card-links w-full mt-auto flex flex-wrap ">
                                 {item.links?.map((lnk, i) => (
                                     <Link
                                         key={`${lnk.label}-${i}`}
-                                        className="nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
+                                        className="w-1/2 nav-card-link inline-flex items-center gap-[6px] no-underline cursor-pointer transition-opacity duration-300 hover:opacity-75 text-[15px] md:text-[16px]"
                                         to={lnk.href}
                                         aria-label={lnk.ariaLabel}
                                     >
