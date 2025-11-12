@@ -42,6 +42,13 @@ function createTextTexture(gl, text, font = 'bold 30px monospace', color = 'blac
   return { texture, width: canvas.width, height: canvas.height };
 }
 
+function getResponsiveFontSize(screenWidth) {
+  if (screenWidth < 640) return 'bold 18px Figtree'; // Mobile
+  if (screenWidth < 768) return 'bold 22px Figtree'; // Small tablet
+  if (screenWidth < 1024) return 'bold 26px Figtree'; // Tablet
+  return 'bold 30px Figtree'; // Desktop
+}
+
 class Title {
   constructor({ gl, plane, renderer, text, textColor = '#545050', font = '30px sans-serif' }) {
     autoBind(this);
@@ -210,13 +217,15 @@ class Media {
     this.plane.setParent(this.scene);
   }
   createTitle() {
+    // Use responsive font size based on screen width
+    const responsiveFont = getResponsiveFontSize(this.screen?.width || window.innerWidth);
     this.title = new Title({
       gl: this.gl,
       plane: this.plane,
       renderer: this.renderer,
       text: this.text,
       textColor: this.textColor,
-      fontFamily: this.font
+      font: this.font || responsiveFont
     });
   }
   update(scroll, direction) {
@@ -268,11 +277,41 @@ class Media {
         this.plane.program.uniforms.uViewportSizes.value = [this.viewport.width, this.viewport.height];
       }
     }
-    this.scale = this.screen.height / 1500;
-    this.plane.scale.y = (this.viewport.height * (900 * this.scale)) / this.screen.height;
-    this.plane.scale.x = (this.viewport.width * (700 * this.scale)) / this.screen.width;
+
+    // Responsive scaling based on screen size
+    const isMobile = this.screen.width < 640;
+    const isTablet = this.screen.width >= 640 && this.screen.width < 1024;
+
+    // Adjust base scale for different screen sizes
+    let baseHeight = 1500;
+    let basePlaneHeight = 900;
+    let basePlaneWidth = 700;
+
+    if (isMobile) {
+      baseHeight = 1000;
+      basePlaneHeight = 600;
+      basePlaneWidth = 500;
+    } else if (isTablet) {
+      baseHeight = 1200;
+      basePlaneHeight = 750;
+      basePlaneWidth = 600;
+    }
+
+    this.scale = this.screen.height / baseHeight;
+    // Clamp scale to prevent extreme sizes
+    this.scale = Math.max(0.5, Math.min(1.5, this.scale));
+
+    this.plane.scale.y = (this.viewport.height * (basePlaneHeight * this.scale)) / this.screen.height;
+    this.plane.scale.x = (this.viewport.width * (basePlaneWidth * this.scale)) / this.screen.width;
+
+    // Ensure minimum sizes for mobile
+    if (isMobile) {
+      this.plane.scale.x = Math.max(this.plane.scale.x, this.viewport.width * 0.7);
+      this.plane.scale.y = Math.max(this.plane.scale.y, this.viewport.height * 0.5);
+    }
+
     this.plane.program.uniforms.uPlaneSizes.value = [this.plane.scale.x, this.plane.scale.y];
-    this.padding = 2;
+    this.padding = isMobile ? 1.5 : 2;
     this.width = this.plane.scale.x + this.padding;
     this.widthTotal = this.width * this.length;
     this.x = this.width * this.index;
@@ -347,6 +386,14 @@ class App {
     ];
     const galleryItems = items && items.length ? items : defaultItems;
     this.mediasImages = galleryItems.concat(galleryItems);
+
+    // Get responsive font size
+    const responsiveFont = font || getResponsiveFontSize(this.screen?.width || window.innerWidth);
+
+    // Adjust border radius for mobile
+    const isMobile = this.screen?.width < 640;
+    const responsiveBorderRadius = isMobile ? borderRadius * 0.8 : borderRadius;
+
     this.medias = this.mediasImages.map((data, index) => {
       return new Media({
         geometry: this.planeGeometry,
@@ -361,8 +408,8 @@ class App {
         viewport: this.viewport,
         bend,
         textColor,
-        borderRadius,
-        font
+        borderRadius: responsiveBorderRadius,
+        font: responsiveFont
       });
     });
   }
@@ -374,7 +421,10 @@ class App {
   onTouchMove(e) {
     if (!this.isDown) return;
     const x = e.touches ? e.touches[0].clientX : e.clientX;
-    const distance = (this.start - x) * (this.scrollSpeed * 0.025);
+    // Adjust sensitivity for mobile devices
+    const isMobile = window.innerWidth < 768;
+    const sensitivity = isMobile ? 0.035 : 0.025;
+    const distance = (this.start - x) * (this.scrollSpeed * sensitivity);
     this.scroll.target = this.scroll.position + distance;
   }
   onTouchUp() {
@@ -383,7 +433,10 @@ class App {
   }
   onWheel(e) {
     const delta = e.deltaY || e.wheelDelta || e.detail;
-    this.scroll.target += (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * 0.2;
+    // Adjust scroll speed for mobile/trackpad vs mouse wheel
+    const isMobile = window.innerWidth < 768;
+    const wheelMultiplier = isMobile ? 0.15 : 0.2;
+    this.scroll.target += (delta > 0 ? this.scrollSpeed : -this.scrollSpeed) * wheelMultiplier;
     this.onCheckDebounce();
   }
   onCheck() {
@@ -407,7 +460,9 @@ class App {
     const width = height * this.camera.aspect;
     this.viewport = { width, height };
     if (this.medias) {
-      this.medias.forEach(media => media.onResize({ screen: this.screen, viewport: this.viewport }));
+      this.medias.forEach(media => {
+        media.onResize({ screen: this.screen, viewport: this.viewport });
+      });
     }
   }
   update() {
@@ -426,19 +481,25 @@ class App {
     this.boundOnTouchDown = this.onTouchDown.bind(this);
     this.boundOnTouchMove = this.onTouchMove.bind(this);
     this.boundOnTouchUp = this.onTouchUp.bind(this);
-    window.addEventListener('resize', this.boundOnResize);
+
+    // Debounce resize for better performance
+    this.boundDebouncedResize = debounce(this.boundOnResize, 150);
+    window.addEventListener('resize', this.boundDebouncedResize);
+    window.addEventListener('orientationchange', this.boundDebouncedResize);
+
     window.addEventListener('mousewheel', this.boundOnWheel);
-    window.addEventListener('wheel', this.boundOnWheel);
+    window.addEventListener('wheel', this.boundOnWheel, { passive: false });
     window.addEventListener('mousedown', this.boundOnTouchDown);
     window.addEventListener('mousemove', this.boundOnTouchMove);
     window.addEventListener('mouseup', this.boundOnTouchUp);
-    window.addEventListener('touchstart', this.boundOnTouchDown);
-    window.addEventListener('touchmove', this.boundOnTouchMove);
+    window.addEventListener('touchstart', this.boundOnTouchDown, { passive: false });
+    window.addEventListener('touchmove', this.boundOnTouchMove, { passive: false });
     window.addEventListener('touchend', this.boundOnTouchUp);
   }
   destroy() {
     window.cancelAnimationFrame(this.raf);
-    window.removeEventListener('resize', this.boundOnResize);
+    window.removeEventListener('resize', this.boundDebouncedResize);
+    window.removeEventListener('orientationchange', this.boundDebouncedResize);
     window.removeEventListener('mousewheel', this.boundOnWheel);
     window.removeEventListener('wheel', this.boundOnWheel);
     window.removeEventListener('mousedown', this.boundOnTouchDown);

@@ -59,8 +59,8 @@ const Home = () => {
     return (
         <div className='relative'>
             {/* Hero */}
-            <main className='w-full h-[70dvh] md:h-screen relative flex items-start bg-[#f3f3f3]'>
-                <div className='z-10 flex flex-col justify-center md:justify-end p-5 h-full w-full md:w-1/2'>
+            <main className='w-full h-[70dvh] md:h-screen relative flex flex-col md:flex-row items-start bg-[#f3f3f3] overflow-hidden'>
+                <div className='z-10 flex flex-col justify-center md:justify-end p-4 sm:p-5 h-full w-full md:w-1/2 relative'>
                     <SplitText
                         as='h1'
                         text='BLACKMOTION.ID'
@@ -69,7 +69,7 @@ const Home = () => {
                         fromY={24}
                         duration={0.8}
                         delay={1.2}
-                        className='font-head tracking-widest text-3xl sm:text-4xl md:text-6xl text-dark'
+                        className='font-head tracking-widest text-2xl sm:text-3xl md:text-5xl lg:text-6xl text-dark'
                     />
                     <SplitText
                         as='p'
@@ -79,14 +79,14 @@ const Home = () => {
                         fromY={16}
                         duration={0.6}
                         delay={1.6}
-                        className='font-body text-xs text-dark mt-2'
+                        className='font-body text-xs sm:text-sm text-dark mt-2 break-words'
                     />
                 </div>
-                <div className='w-full md:w-1/2 h-full absolute top-0 left-0 md:relative z-0'><video src={bg} loop muted autoPlay className='h-full w-full object-cover'></video></div>
+                <div className='w-full md:w-1/2 h-full absolute md:relative top-0 left-0 md:left-auto z-0'><video src={bg} loop muted autoPlay className='h-full w-full object-cover'></video></div>
             </main>
             {/* About */}
-            <main className='w-full bg-dark pb-72 md:pb-40'>
-                <div className='text-gray-400 text-xl md:text-2xl/12 tracking-widest font-body text-justify px-3 pt-6'>
+            <main className='w-full bg-dark pb-40 sm:pb-60 md:pb-40'>
+                <div className='text-gray-400 text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed md:leading-normal tracking-widest font-body text-justify px-3 sm:px-4 md:px-6 pt-6'>
                     <SplitText
                         as='span'
                         text='BLACKMOTION.ID'
@@ -231,16 +231,16 @@ const Home = () => {
                     />
                 </div>
                 {/* Achievement */}
-                <div ref={achievementsContainerRef} className='w-full mt-40 flex flex-col items-end min-h-[300vh]'>
-                    <section ref={achievementsRef} className='sticky w-full top-1/2 transform -translate-y-1/2 flex flex-col md:flex-row items-center justify-around p-10 md:p-0'>
+                <div ref={achievementsContainerRef} className='w-full mt-20 sm:mt-32 md:mt-40 flex flex-col items-end min-h-[200vh] sm:min-h-[250vh] md:min-h-[300vh]'>
+                    <section ref={achievementsRef} className='sticky w-full top-1/2 transform -translate-y-1/2 flex flex-col md:flex-row items-center justify-around p-4 sm:p-6 md:p-10 lg:p-0 gap-6 md:gap-0'>
                         <TiltedCard
                             imageSrc={achievements[currentAchievementIndex]?.images}
                             altText={achievements[currentAchievementIndex]?.year}
                             captionText={`Blackmotion.id | ${achievements[currentAchievementIndex]?.year}`}
-                            containerHeight="300px"
-                            containerWidth="500px"
-                            imageHeight="300px"
-                            imageWidth="500px"
+                            containerHeight={{ base: '250px', sm: '280px', md: '300px', lg: '350px' }}
+                            containerWidth={{ base: '100%', sm: '90%', md: '400px', lg: '500px' }}
+                            imageHeight={{ base: '200px', sm: '240px', md: '280px', lg: '300px' }}
+                            imageWidth={{ base: '100%', sm: '90%', md: '90%', lg: '90%' }}
                             rotateAmplitude={10}
                             scaleOnHover={1.01}
                             showMobileWarning={false}
@@ -252,11 +252,11 @@ const Home = () => {
                                 </p>
                             }
                         />
-                        <div className='text-light py-5 flex flex-col items-start justify-start'>
-                            <p className='font-head text-5xl tracking-wider my-10'>
+                        <div className='text-light py-5 flex flex-col items-start justify-start w-full md:w-auto px-4 md:px-0'>
+                            <p className='font-head text-3xl sm:text-4xl md:text-5xl tracking-wider my-6 md:my-10'>
                                 {achievements[currentAchievementIndex]?.year}
                             </p>
-                            <ul className='flex flex-col items-start justify-start list-disc'>
+                            <ul className='flex flex-col items-start justify-start list-disc list-inside sm:list-outside space-y-2 text-sm sm:text-base'>
                                 {achievements[currentAchievementIndex]?.items.map((achievement, achievementIndex) => (
                                     <li key={achievementIndex} className='font-body'>{achievement}</li>
                                 ))}
@@ -265,10 +265,12 @@ const Home = () => {
                     </section>
                 </div>
                 {/* Project CTA */}
-                <Link to={'/projects'} className='text-light text-xs font-body rounded-full border border-gray-400 flex items-center justify-center w-28 h-12'>Recent Projects</Link>
+                <div className='w-full flex justify-center md:justify-start px-4 md:px-0 mb-6 md:mb-0'>
+                    <Link to={'/projects'} className='text-light text-xs sm:text-sm font-body rounded-full border border-gray-400 flex items-center justify-center w-32 sm:w-36 h-12 hover:bg-gray-800 transition-colors'>Recent Projects</Link>
+                </div>
                 {/* CLients */}
                 <div
-                    className='w-full h-full flex items-center justify-center px-5 md:px-20 py-12'
+                    className='w-full h-full flex items-center justify-center px-4 sm:px-5 md:px-20 py-8 sm:py-10 md:py-12'
                     ref={el => {
                         if (!el) return;
                         gsap.set(el, { opacity: 0, y: 60 });
@@ -282,15 +284,15 @@ const Home = () => {
                         });
                     }}
                 >
-                    <img src={client} className='object-contain w-full h-full' alt="" />
+                    <img src={client} className='object-contain w-full h-full max-h-[200px] sm:max-h-[300px] md:max-h-none' alt="" />
                 </div>
                 {/* Service */}
-                <div className='pt-10'>
-                    <p className='text-light pt-5 px-3 text-lg font-body'>Our Services:</p>
-                    <div className='py-6 flex flex-col md:flex-row flex-wrap gap-10 items-center justify-around'>
+                <div className='pt-6 sm:pt-8 md:pt-10'>
+                    <p className='text-light pt-5 px-3 sm:px-4 md:px-6 text-base sm:text-lg md:text-xl font-body'>Our Services:</p>
+                    <div className='py-4 sm:py-6 flex flex-col md:flex-row flex-wrap gap-6 sm:gap-8 md:gap-10 items-start md:items-center justify-around'>
                         {services.map((item) => {
                             return (
-                                <div key={item.id} className='service-item text-light px-3 font-body text-lg w-full md:w-1/3 border-b border-b-gray-500'>
+                                <div key={item.id} className='service-item text-light px-3 sm:px-4 font-body text-base sm:text-lg w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.5rem)] border-b border-b-gray-500 pb-4'>
                                     <SplitText
                                         as='span'
                                         text={`0${item.id}`}
@@ -302,7 +304,7 @@ const Home = () => {
                                         useScrollTrigger={true}
                                         scrollTriggerScrub={1}
                                         scrollTriggerStart='top 80%'
-                                        className='text-5xl text-gray-500/25 font-head px-2' />
+                                        className='text-4xl sm:text-5xl text-gray-500/25 font-head px-2 block' />
                                     <SplitText
                                         as='span'
                                         text={item.title}
@@ -313,7 +315,8 @@ const Home = () => {
                                         delay={1.2}
                                         useScrollTrigger={true}
                                         scrollTriggerScrub={1}
-                                        scrollTriggerStart='top 80%' />
+                                        scrollTriggerStart='top 80%'
+                                        className='block' />
                                 </div>
                             )
                         })}

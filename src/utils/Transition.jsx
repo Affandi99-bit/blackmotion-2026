@@ -6,6 +6,8 @@ const Transition = ({ children }) => {
     const location = useLocation();
     const pageRef = useRef(null);
     const overlayRef = useRef(null);
+    const isFirstRender = useRef(true);
+    const previousPath = useRef(location.pathname);
 
     useEffect(() => {
         const page = pageRef.current;
@@ -13,20 +15,40 @@ const Transition = ({ children }) => {
 
         if (!page || !overlay) return;
 
+        // On first render, just set initial states without animation
+        if (isFirstRender.current) {
+            gsap.set(page, { opacity: 1, y: 0, scale: 1, visibility: 'visible' });
+            gsap.set(overlay, { scaleX: 0, transformOrigin: 'left center', zIndex: 9999 });
+            isFirstRender.current = false;
+            previousPath.current = location.pathname;
+            return;
+        }
+
+        // Only animate if path actually changed
+        if (previousPath.current === location.pathname) return;
+        previousPath.current = location.pathname;
+
         // Create timeline for page transition
         const tl = gsap.timeline();
 
-        // Set initial states
-        gsap.set(page, { opacity: 0, y: 30, scale: 0.95, visibility: 'hidden' });
-        gsap.set(overlay, { scaleX: 0, transformOrigin: 'left center' });
-
         // Page transition animation sequence
-        tl.to(overlay, {
-            scaleX: 1,
-            duration: 0.8,
-            ease: 'power3.inOut'
+        tl.to(page, {
+            opacity: 0,
+            y: -30,
+            scale: 0.95,
+            duration: 0.4,
+            ease: 'power3.in'
         })
-            .set(page, { visibility: 'visible' }) // Make content visible only after overlay covers screen
+            .to(overlay, {
+                scaleX: 1,
+                duration: 0.8,
+                ease: 'power3.inOut'
+            }, '-=0.2')
+            .set(page, {
+                visibility: 'visible',
+                y: 30,
+                scale: 0.95
+            }) // Reset position for new page
             .to(page, {
                 opacity: 1,
                 y: 0,
