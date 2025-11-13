@@ -72,6 +72,7 @@ precision highp float;
 uniform vec2 uImageSize;
 uniform vec2 uPlaneSize;
 uniform sampler2D tMap;
+uniform float uOpacity;
 
 varying vec2 vUv;
 
@@ -91,7 +92,8 @@ void main() {
 
   vec2 uv = vUv * scale + (1.0 - scale) * 0.5;
 
-  gl_FragColor = texture2D(tMap, uv);
+  vec4 color = texture2D(tMap, uv);
+  gl_FragColor = vec4(color.rgb, color.a * uOpacity);
 }
 `;
 
@@ -162,6 +164,7 @@ class Media {
         this.program = new Program(this.gl, {
             depthTest: false,
             depthWrite: false,
+            transparent: true,
             fragment: fragmentShader,
             vertex: vertexShader,
             uniforms: {
@@ -174,7 +177,8 @@ class Media {
                 distortionAxis: { value: [1, 1, 0] },
                 uDistortion: { value: this.distortion },
                 uViewportSize: { value: [this.viewport.width, this.viewport.height] },
-                uTime: { value: 0 }
+                uTime: { value: 0 },
+                uOpacity: { value: 1.0 }
             },
             cullFace: false
         });
@@ -234,11 +238,28 @@ class Media {
         const topEdge = this.plane.position.y + planeHeight / 2;
         const bottomEdge = this.plane.position.y - planeHeight / 2;
 
-        if (topEdge < -viewportHeight / 2) {
+        // Only wrap when completely off-screen to prevent flashing
+        const buffer = viewportHeight * 0.5; // Add buffer to prevent premature wrapping
+
+        if (topEdge < -viewportHeight / 2 - buffer) {
             this.extra -= this.heightTotal;
-        } else if (bottomEdge > viewportHeight / 2) {
+        } else if (bottomEdge > viewportHeight / 2 + buffer) {
             this.extra += this.heightTotal;
         }
+
+        // Control opacity based on distance from viewport center to prevent stacking/flashing
+        const distanceFromCenter = Math.abs(this.plane.position.y);
+        const maxVisibleDistance = viewportHeight * 0.8; // Only show images within 80% of viewport
+
+        // Fade out images that are too far from center
+        let opacity = 1.0;
+        if (distanceFromCenter > maxVisibleDistance) {
+            const fadeDistance = viewportHeight * 0.2;
+            const fadeStart = maxVisibleDistance;
+            opacity = Math.max(0, 1 - (distanceFromCenter - fadeStart) / fadeDistance);
+        }
+
+        this.program.uniforms.uOpacity.value = opacity;
     }
 }
 

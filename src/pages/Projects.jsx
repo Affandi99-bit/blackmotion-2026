@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const Projects = () => {
     return (
         <div className='w-full relative'>
-            <p className="absolute text-light font-body font-semibold tracking-wider text-3xl sm:text-5xl md:text-7xl lg:text-9xl top-4 sm:top-8 md:top-12 lg:top-20 left-4 sm:left-8 md:left-12 lg:left-20 z-10 pointer-events-none">Projects</p>
+            <p className="absolute text-light font-body font-semibold tracking-wider text-5xl md:text-7xl lg:text-9xl top-20 sm:top-8 md:top-12 lg:top-20 left-4 sm:left-8 md:left-12 lg:left-20 z-10 pointer-events-none">Projects</p>
             <div className="absolute w-64 bottom-4 sm:bottom-6 md:bottom-8 lg:bottom-10 right-4 sm:right-6 md:right-8 lg:right-10 text-light z-10 p-4 sm:p-5 md:p-6">
                 <p className='font-body font-semibold text-justify tracking-wider text-xs mb-4 sm:mb-5'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Assumenda mollitia minus facilis illo repudiandae nihil praesentium animi, deserunt exercitationem laborum.</p>
                 <div className='w-full pt-3 sm:pt-4 md:pt-5 flex items-end justify-between gap-2 sm:gap-3 md:gap-4 font-body font-semibold tracking-wider text-xs'>

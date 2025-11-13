@@ -264,10 +264,7 @@ const Home = () => {
                         </div>
                     </section>
                 </div>
-                {/* Project CTA */}
-                <div className='w-full flex justify-center md:justify-start px-4 md:px-0 mb-6 md:mb-0'>
-                    <Link to={'/projects'} className='text-light text-xs sm:text-sm font-body rounded-full border border-gray-400 flex items-center justify-center w-32 sm:w-36 h-12 hover:bg-gray-800 transition-colors'>Recent Projects</Link>
-                </div>
+
                 {/* CLients */}
                 <div
                     className='w-full h-full flex items-center justify-center px-4 sm:px-5 md:px-20 py-8 sm:py-10 md:py-12'
@@ -286,13 +283,59 @@ const Home = () => {
                 >
                     <img src={client} className='object-contain w-full h-full max-h-[200px] sm:max-h-[300px] md:max-h-none' alt="" />
                 </div>
+                {/* Project CTA */}
+                <Link to={'/projects'} className='w-full flex justify-center items-center'>
+                    <button
+                        className="group font-body relative w-auto cursor-pointer overflow-hidden rounded-full border border-gray-200 bg-white px-5 py-2 text-center font-medium text-gray-900 shadow-sm transition-all duration-500 hover:shadow-md dark:border-black dark:bg-gray-950 dark:text-white dark:hover:border-gray-700"
+                    >
+                        <div className="flex items-center gap-3">
+                            <div
+                                className="h-2 w-2 rounded-full bg-dark transition-all duration-300 group-hover:scale-[100.8] dark:bg-white"
+                            ></div>
+                            <span
+                                className="inline-block transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0"
+                            >
+                                Our Projects
+                            </span>
+                        </div>
+
+                        <div
+                            className="absolute top-0 z-10 flex h-full w-full translate-x-12 items-center justify-center gap-3 bg-dark text-white opacity-0 transition-all duration-300 group-hover:-translate-x-5 group-hover:opacity-100 dark:bg-gray-100 dark:text-gray-900"
+                        >
+                            <div className="flex items-center gap-3 whitespace-nowrap">
+                                <span className="leading-none font-medium">Our Projects</span>
+
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    className="h-4 w-4 leading-none"
+                                    fill="none"
+                                    viewBox="0 0 24 24"
+                                    stroke="currentColor"
+                                    strokeWidth="2.5"
+                                    aria-hidden="true"
+                                >
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M3 12h14"
+                                    ></path>
+                                    <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        d="M13 6l6 6-6 6"
+                                    ></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </button>
+                </Link>
                 {/* Service */}
                 <div className='pt-6 sm:pt-8 md:pt-10'>
                     <p className='text-light pt-5 px-3 sm:px-4 md:px-6 text-base sm:text-lg md:text-xl font-body'>Our Services:</p>
                     <div className='py-4 sm:py-6 flex flex-col md:flex-row flex-wrap gap-6 sm:gap-8 md:gap-10 items-start md:items-center justify-around'>
                         {services.map((item) => {
                             return (
-                                <div key={item.id} className='service-item text-light px-3 sm:px-4 font-body text-base sm:text-lg w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.5rem)] border-b border-b-gray-500 pb-4'>
+                                <div key={item.id} className='service-item flex item text-light px-3 sm:px-4 font-body text-base sm:text-lg w-full md:w-[calc(50%-1.25rem)] lg:w-[calc(33.333%-1.5rem)] border-b border-b-gray-500 pb-4'>
                                     <SplitText
                                         as='span'
                                         text={`0${item.id}`}
