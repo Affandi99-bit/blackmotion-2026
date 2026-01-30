@@ -59,7 +59,7 @@ const Home = () => {
     return (
         <div className='relative'>
             {/* Hero */}
-            <main className='w-full h-[70dvh] md:h-screen relative flex flex-col md:flex-row items-start bg-[#f3f3f3] overflow-hidden'>
+            <main className='w-[full] h-[70dvh] md:h-screen relative flex flex-col md:flex-row items-start bg-[#f3f3f3] overflow-hidden'>
                 <div className='z-10 flex flex-col justify-center md:justify-end p-4 sm:p-5 h-full w-full md:w-1/2 relative'>
                     <SplitText
                         as='h1'
@@ -81,12 +81,63 @@ const Home = () => {
                         delay={1.6}
                         className='font-body text-xs sm:text-sm text-dark mt-2 break-words'
                     />
+                    <SplitText
+                        as='h1'
+                        text='Percayakan Animasi Anda pada Ahlinya di Animasi Studio Cepat & Original'
+                        type='words'
+                        stagger={0.02}
+                        fromY={16}
+                        duration={0.6}
+                        delay={1.6}
+                        className='font-body text-xl sm:text-sm text-dark mt-10 break-words'
+                    />
+                    <SplitText
+                        as='p'
+                        text='Selesai dalam 2 Hari!'
+                        type='words'
+                        stagger={0.02}
+                        fromY={16}
+                        duration={0.6}
+                        delay={1.6}
+                        className='font-body text-xs sm:text-sm text-dark mt-2 break-words'
+                    />
+                    <SplitText
+                        as='p'
+                        text='Kami telah dipercaya oleh banyak brand besar seperti BRI, BNI, Gojek, Pertamina, Siemens.'
+                        type='words'
+                        stagger={0.02}
+                        fromY={16}
+                        duration={0.6}
+                        delay={1.6}
+                        className='font-body text-xs sm:text-sm text-dark mt-2 break-words'
+                    />
+                    <SplitText
+                        as='p'
+                        text='Kami menciptakan animasi 100% original dengan aset yang dibuat khusus sesuai kebutuhan bisnis Anda. Efisien, Kreatif, dan Mulai dari Rp 1.000.000.'
+                        type='words'
+                        stagger={0.02}
+                        fromY={16}
+                        duration={0.6}
+                        delay={1.6}
+                        className='font-body text-xs sm:text-sm text-dark break-words mt-2'
+                    />
+                    <SplitText
+                        as='p'
+                        text='Bawa Visual Brand Anda ke Tingkat Berikutnya!'
+                        type='words'
+                        stagger={0.02}
+                        fromY={16}
+                        duration={0.6}
+                        delay={1.6}
+                        className='font-body text-xs sm:text-sm text-dark break-words mt-2'
+                    />
+                    <Button link={'https://wa.me/628113577793'} target={'_blank'} text={'Contact Us'} />
                 </div>
                 <div className='w-full md:w-1/2 h-full absolute md:relative top-0 left-0 md:left-auto z-0'><video src={bg} loop muted autoPlay className='h-full w-full object-cover'></video></div>
             </main>
             {/* About */}
             <main className='w-full bg-dark pb-40 sm:pb-60 md:pb-40'>
-                <div className='text-gray-400 text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed md:leading-normal tracking-widest font-body text-justify px-3 sm:px-4 md:px-6 pt-6'>
+                <div className='w-[60%] text-gray-400 text-base sm:text-lg md:text-xl lg:text-2xl leading-relaxed md:leading-normal tracking-widest font-body text-justify px-3 sm:px-4 md:px-6 pt-6'>
                     <SplitText
                         as='span'
                         text='BLACKMOTION.ID'
@@ -231,8 +282,8 @@ const Home = () => {
                     />
                 </div>
                 {/* Achievement */}
-                <div ref={achievementsContainerRef} className='w-full mt-20 sm:mt-32 md:mt-40 flex flex-col items-end min-h-[200vh] sm:min-h-[250vh] md:min-h-[300vh]'>
-                    <section ref={achievementsRef} className='sticky w-full top-1/2 transform -translate-y-1/2 flex flex-col md:flex-row items-center justify-around p-4 sm:p-6 md:p-10 lg:p-0 gap-6 md:gap-0'>
+                <div ref={achievementsContainerRef} className='w-full mt-20 sm:mt-32 md:mt-40 flex flex-col items-center min-h-[200vh] sm:min-h-[250vh] md:min-h-[300vh]'>
+                    <section ref={achievementsRef} className='sticky w-[] top-1/2 transform -translate-y-1/2 flex flex-col md:flex-row items-center justify-around p-4 sm:p-6 md:p-10 lg:p-0 gap-6 md:gap-0'>
                         <TiltedCard
                             imageSrc={achievements[currentAchievementIndex]?.images}
                             altText={achievements[currentAchievementIndex]?.year}
@@ -281,54 +332,10 @@ const Home = () => {
                         });
                     }}
                 >
-                    <img src={client} className='object-contain w-full h-full max-h-[200px] sm:max-h-[300px] md:max-h-none' alt="" />
+                    <img src={client} className='object-contain w-[70%] h-full max-h-[200px] sm:max-h-[300px] md:max-h-none' alt="" />
                 </div>
                 {/* Project CTA */}
-                <Link to={'/projects'} className='w-full flex justify-center items-center'>
-                    <button
-                        className="group font-body relative w-auto cursor-pointer overflow-hidden rounded-full border border-gray-200 bg-white px-5 py-2 text-center font-medium text-gray-900 shadow-sm transition-all duration-500 hover:shadow-md dark:border-black dark:bg-gray-950 dark:text-white dark:hover:border-gray-700"
-                    >
-                        <div className="flex items-center gap-3">
-                            <div
-                                className="h-2 w-2 rounded-full bg-dark transition-all duration-300 group-hover:scale-[100.8] dark:bg-white"
-                            ></div>
-                            <span
-                                className="inline-block transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0"
-                            >
-                                Our Projects
-                            </span>
-                        </div>
-
-                        <div
-                            className="absolute top-0 z-10 flex h-full w-full translate-x-12 items-center justify-center gap-3 bg-dark text-white opacity-0 transition-all duration-300 group-hover:-translate-x-5 group-hover:opacity-100 dark:bg-gray-100 dark:text-gray-900"
-                        >
-                            <div className="flex items-center gap-3 whitespace-nowrap">
-                                <span className="leading-none font-medium">Our Projects</span>
-
-                                <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="h-4 w-4 leading-none"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                    strokeWidth="2.5"
-                                    aria-hidden="true"
-                                >
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M3 12h14"
-                                    ></path>
-                                    <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        d="M13 6l6 6-6 6"
-                                    ></path>
-                                </svg>
-                            </div>
-                        </div>
-                    </button>
-                </Link>
+                <Button link={'/projects'} text={'Our Projects'} />
                 {/* Service */}
                 <div className='pt-6 sm:pt-8 md:pt-10'>
                     <p className='text-light pt-5 px-3 sm:px-4 md:px-6 text-base sm:text-lg md:text-xl font-body'>Our Services:</p>

@@ -1,14 +1,53 @@
 import React from 'react'
 import './button.css'
-const Button = () => {
+import { Link } from 'react-router-dom'
+
+const Button = ({ link, text, target }) => {
     return (
-        <button class="cta">
-            <span>Hover me</span>
-            <svg width="15px" height="10px" viewBox="0 0 13 10">
-                <path d="M1,5 L11,5"></path>
-                <polyline points="8 1 12 5 8 9"></polyline>
-            </svg>
-        </button>
+        <Link to={link} className='w-full flex justify-center items-center'>
+            <a
+                target={target} className="group font-body relative w-auto cursor-pointer overflow-hidden rounded-full border border-gray-200 bg-white px-5 py-2 text-center font-medium text-gray-900 shadow-sm transition-all duration-500 hover:shadow-md dark:border-black dark:bg-gray-950 dark:text-white dark:hover:border-gray-700"
+            >
+                <div className="flex items-center gap-3">
+                    <div
+                        className="h-2 w-2 rounded-full bg-dark transition-all duration-300 group-hover:scale-[100.8] dark:bg-white"
+                    ></div>
+                    <span
+                        className="inline-block transition-all duration-300 group-hover:translate-x-12 group-hover:opacity-0"
+                    >
+                        {text}
+                    </span>
+                </div>
+                <div
+                    className="absolute top-0 z-10 flex h-full w-full translate-x-12 items-center justify-center gap-3 bg-dark text-white opacity-0 transition-all duration-300 group-hover:-translate-x-5 group-hover:opacity-100 dark:bg-gray-100 dark:text-gray-900"
+                >
+                    <div className="flex items-center gap-3 whitespace-nowrap">
+                        <span className="leading-none font-medium">{text}</span>
+
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-4 w-4 leading-none"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            aria-hidden="true"
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M3 12h14"
+                            ></path>
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M13 6l6 6-6 6"
+                            ></path>
+                        </svg>
+                    </div>
+                </div>
+            </a>
+        </Link>
 
     )
 }
