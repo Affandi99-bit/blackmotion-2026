@@ -1,6 +1,6 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import { Navbar, SmoothScroll } from './components'
+import { Navbar, SmoothScroll, FloatCTA } from './components'
 import { Home, Projects, Contact, Design, Motion } from './pages'
 import Transition from './utils/Transition'
 import { items } from './utils/constant'
@@ -9,6 +9,7 @@ const App = () => {
   return (
     <main className='bg-dark'>
       <SmoothScroll />
+      <FloatCTA />
       <Navbar
         logo='/logo.png'
         logoAlt="Blackmotion.id Logo"

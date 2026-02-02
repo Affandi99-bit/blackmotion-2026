@@ -7,8 +7,12 @@ import Footer from "./Footer";
 import Button from "./button/button";
 import Posters from "./Poster";
 import Gallery from "./Gallery";
+import FloatCTA from "./FloatCTA";
+import CardSwap from "./CardSwap";
+import Masonry from "./Masonry";
 export {
   Navbar,
+  FloatCTA,
   SmoothScroll,
   Posters,
   SplitText,
@@ -17,4 +21,6 @@ export {
   Footer,
   Button,
   Gallery,
+  Masonry,
+  CardSwap
 };

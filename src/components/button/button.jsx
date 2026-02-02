@@ -2,11 +2,11 @@ import React from 'react'
 import './button.css'
 import { Link } from 'react-router-dom'
 
-const Button = ({ link, text, target }) => {
+const Button = ({ link, text, target, className }) => {
     return (
-        <Link to={link} className='w-full flex justify-center items-center'>
-            <a
-                target={target} className="group font-body relative w-auto cursor-pointer overflow-hidden rounded-full border border-gray-200 bg-white px-5 py-2 text-center font-medium text-gray-900 shadow-sm transition-all duration-500 hover:shadow-md dark:border-black dark:bg-gray-950 dark:text-white dark:hover:border-gray-700"
+        <Link to={link} className={` flex justify-center items-center ${className}`}>
+            <div
+                className="group font-body relative w-auto cursor-pointer overflow-hidden rounded-full border border-gray-200 bg-white px-5 py-2 text-center font-medium text-gray-900 shadow-sm transition-all duration-500 hover:shadow-md dark:border-black dark:bg-gray-950 dark:text-white dark:hover:border-gray-700"
             >
                 <div className="flex items-center gap-3">
                     <div
@@ -46,7 +46,7 @@ const Button = ({ link, text, target }) => {
                         </svg>
                     </div>
                 </div>
-            </a>
+            </div>
         </Link>
 
     )

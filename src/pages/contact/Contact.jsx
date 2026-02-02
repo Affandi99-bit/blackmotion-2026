@@ -1,6 +1,6 @@
 import React from 'react'
-import { Footer, SplitText, Magnet } from '../components'
-import { items } from '../utils/constant'
+import { Footer, SplitText, Magnet } from '../../components'
+import { items } from '../../utils/constant'
 import { Link } from 'react-router-dom'
 
 const Contact = () => {
@@ -38,7 +38,7 @@ const Contact = () => {
                 })}
             </div>
             {/* Footer */}
-            <Footer />
+            {/* <Footer /> */}
         </div>
     )
 }

@@ -1,7 +1,7 @@
-import Home from "./Home";
-import Projects from "./Projects";
-import Contact from "./Contact";
-import Design from "./Design";
-import Motion from "./Motion";
+import Home from "./home/Home";
+import Projects from "./projects/Projects";
+import Contact from "./contact/Contact";
+import Design from "./design/Design";
+import Motion from "./motion/Motion";
 
 export { Home, Projects, Contact, Design, Motion };

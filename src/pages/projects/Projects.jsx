@@ -1,6 +1,6 @@
 import React from 'react'
-import { SplitText, Footer, Posters } from '../components'
-import { items, design, motion } from '../utils/constant'
+import { SplitText, Footer, Posters } from '../../components'
+import { items, design, motion } from '../../utils/constant'
 import { Link } from 'react-router-dom'
 
 const Projects = () => {
